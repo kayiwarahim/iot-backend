@@ -1,0 +1,23 @@
+# Example Render configuration (two services):
+# 1) web service (Gunicorn) that runs the Flask app
+# 2) background worker service that runs the MQTT bridge
+
+services:
+  - type: web
+    name: backend-web
+    env: docker # or "python" if you want Render to use its python build
+    plan: free
+    branch: main
+    repo: <REPLACE_WITH_YOUR_GITHUB_REPO>
+    buildCommand: ''
+    startCommand: gunicorn main:app -b 0.0.0.0:$PORT --workers 2
+
+  - type: worker
+    name: ttn-bridge
+    env: docker
+    plan: free
+    branch: main
+    repo: <REPLACE_WITH_YOUR_GITHUB_REPO>
+    startCommand: python services/mqtt_bridge.py
+
+# Note: Replace <REPLACE_WITH_YOUR_GITHUB_REPO> with your GitHub repo URL in Render UI or leave out and configure in Render console.
