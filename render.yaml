@@ -8,7 +8,7 @@ services:
     env: docker # or "python" if you want Render to use its python build
     plan: free
     branch: main
-    repo: <REPLACE_WITH_YOUR_GITHUB_REPO>
+    repo: https://github.com/kayiwarahim/iot-backend.git
     buildCommand: ''
     startCommand: gunicorn main:app -b 0.0.0.0:$PORT --workers 2
 
@@ -17,7 +17,7 @@ services:
     env: docker
     plan: free
     branch: main
-    repo: <REPLACE_WITH_YOUR_GITHUB_REPO>
+    repo: https://github.com/kayiwarahim/iot-backend.git
     startCommand: python services/mqtt_bridge.py
 
-# Note: Replace <REPLACE_WITH_YOUR_GITHUB_REPO> with your GitHub repo URL in Render UI or leave out and configure in Render console.
+# Note: Replace with your GitHub repo URL in Render UI or leave out and configure in Render console.
